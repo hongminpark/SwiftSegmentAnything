@@ -26,10 +26,10 @@ extension SwiftSegmentAnythingMask {
             return self
         }
         // run the morphology stuff
-        let minFilter = CIFilter.morphologyMinimum()
+        let minFilter = CIFilter.morphologyMaximum()
         minFilter.radius = radius
         minFilter.inputImage = self
-        let maxFilter = CIFilter.morphologyMaximum()
+        let maxFilter = CIFilter.morphologyMinimum()
         maxFilter.radius = radius
         maxFilter.inputImage = minFilter.outputImage
         guard let result = maxFilter.outputImage else {
