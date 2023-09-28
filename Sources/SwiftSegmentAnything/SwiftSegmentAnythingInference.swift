@@ -62,10 +62,10 @@ public actor SwiftSegmentAnythingInference {
             for box in includeBoxes {
                 pointCoords.append(Float32(box.minX * scaleX))
                 pointCoords.append(Float32(box.minY * scaleY))
-                pointLabels.append(3)
+                pointLabels.append(2)
                 pointCoords.append(Float32(box.maxX * scaleX))
                 pointCoords.append(Float32(box.maxY * scaleY))
-                pointLabels.append(4)
+                pointLabels.append(3)
             }
         }
         let pointData = pointCoords.toData()
