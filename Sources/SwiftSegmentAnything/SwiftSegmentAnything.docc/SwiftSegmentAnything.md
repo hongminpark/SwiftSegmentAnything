@@ -1,24 +1,15 @@
 # ``SwiftSegmentAnything``
 
-A Swift implementation of the [Segment Anything](https://segment-anything.com/) model. Add the power of Segment Anything to your app.
+A Swift implementation of the [Segment Anything](https://segment-anything.com/) model. Add the power of Segment Anything to your app with this Swift Package.
 
-## Overview
 
-Segment anything allows you to 
+## Demos
 
-## Installation
+- <doc:BoxDemo>: Segment based on a bounding box.
 
-### Xcode Project
+> tip: We have a demo app in the App Store! This is the best way to demo the capabilities of this package on your own content.
 
-### Package.Swift
-
-To install, use...
-
-## Demo
-
-> We have a demo app! To see this package in use, download our app at 
-
-## Basic Usage
+## Basic API Example
 
 ```swift
 import SwiftSegmentAnything
@@ -29,6 +20,7 @@ let inference = segmentAnything.inference(forUiImage: image)
 let mask = try await inference.getMask(includePoints: [CGPoint(x: 500, y: 500)])
 ```
 
-## Reporting an Issue
+## Getting Started
 
-You can either report an GitHub issue [here](https://github.com/ditotechnologies/SwiftSegmentAnything/issues). Or, if you would like your issue to remain private. Please reach out to anthony@ditotechnologies.com
+- <doc:Installation>
+- <doc:Support>

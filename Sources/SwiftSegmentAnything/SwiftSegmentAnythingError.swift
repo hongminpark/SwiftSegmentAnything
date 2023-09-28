@@ -16,4 +16,6 @@ public enum SwiftSegmentAnythingError : Error {
     
     /// An error thrown when there is no input given to the inference. Please include either `inputPoints`, `excludePoints` and or `includeBoxes` for the input to getMasks.
     case noInput
+    
+    case invalidInput(description: String)
 }
