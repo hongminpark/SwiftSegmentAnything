@@ -28,7 +28,10 @@ public actor SwiftSegmentAnythingInference {
         let _ = try await self.proprocessIfNeeded()
     }
     
-    public func getMask(includePoints: [CGPoint], excludePoints: [CGPoint]) async throws -> CIImage {
+    public func getMask(includePoints: [CGPoint] = [], includeBoxes: [CGRect] = [], excludePoints: [CGPoint] = []) async throws -> CIImage {
+        guard !includeBoxes.isEmpty || !includePoints.isEmpty || !excludePoints.isEmpty else {
+            throw SwiftSegmentAnythingError.noInput
+        }
         let inputSize = SwiftSegmentAnything.imageInputSize
         let preprocessedData = try await self.proprocessIfNeeded()
         let sessionSam = try await segmentAnything.sessionSam()
@@ -49,6 +52,21 @@ public actor SwiftSegmentAnythingInference {
         }
         for _ in excludePoints {
             pointLabels.append(0)
+        }
+        if includeBoxes.isEmpty {
+            // include the padding point
+            pointCoords.append(0)
+            pointCoords.append(0)
+            pointLabels.append(-1)
+        } else {
+            for box in includeBoxes {
+                pointCoords.append(Float32(box.minX * scaleX))
+                pointCoords.append(Float32(box.minY * scaleY))
+                pointLabels.append(3)
+                pointCoords.append(Float32(box.maxX * scaleX))
+                pointCoords.append(Float32(box.maxY * scaleY))
+                pointLabels.append(4)
+            }
         }
         let pointData = pointCoords.toData()
         let ortPointData = try ORTValue(tensorData: NSMutableData(data: pointData), elementType: .float, shape: [1, NSNumber(value: pointCoords.count / 2), 2])

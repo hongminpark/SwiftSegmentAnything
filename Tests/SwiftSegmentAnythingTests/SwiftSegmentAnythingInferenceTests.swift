@@ -43,4 +43,12 @@ final class SwiftSegmentAnythingInferenceTests : XCTestCase {
         XCTAssertGreaterThan(outputMask.extent.width, 0)
         XCTAssertGreaterThan(outputMask.extent.height, 0)
     }
+    
+    func testGetMaskSanityBox() async throws {
+//        let url = Bundle.module.url(forResource: "demo", withExtension: "jpg")!
+//        let ciImage = CIImage(contentsOf: url)!
+//        let sa = SwiftSegmentAnything.init()
+//        let inference = sa.inference(forCiImage: ciImage)
+//        let outputMask = try await inference.getMask(includePoints: <#T##[CGPoint]#>, excludePoints: <#T##[CGPoint]#>)
+    }
 }
