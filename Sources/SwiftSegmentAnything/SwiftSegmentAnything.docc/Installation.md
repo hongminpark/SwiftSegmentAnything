@@ -8,7 +8,7 @@ The first thing that you need to do is get access to the code. Please reach out 
 
 ## Via XCode
 
-
+Add the package to XCode by using the GitHub repository.
 
 ## Via Package.swift
 
