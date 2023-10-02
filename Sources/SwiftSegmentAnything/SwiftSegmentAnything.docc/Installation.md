@@ -12,13 +12,31 @@ Add the package to XCode by using the GitHub repository.
 
 ### 1. Open the Add Package Dialog
 
-Press `File > Add Package Dependency
+Press `File > Add Package Dependencies...`
 
 This window should show up
 
 @Image(source: "installpage1.png")
 
-### 2. Enter the GitHub package URL in the top right corner. That would be []
+### 2. Enter the GitHub package URL in the top right corner. That would be [https://github.com/ditotechnologies/SwiftSegmentAnything](https://github.com/ditotechnologies/SwiftSegmentAnything)
+
+> XCode will create a popup at this step asking you create a GitHub token to allow XCode to access private githubs.
+
+### 3. Add the package to your app
+
+@Image(source: "installpage2.png")
+
+It should look like this.
+
+### 4. Import SwiftSegmentAnything
+
+To import SwiftSegmentAnything:
+
+```swift
+import SwiftSegmentAnything
+
+...
+```
 
 ## Via Package.swift
 
