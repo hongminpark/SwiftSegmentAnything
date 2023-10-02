@@ -8,11 +8,11 @@ Reach out to `anthony@ditotechnologies.com` and we can help you out!
 
 ## Overview
 
-We offer the following:
+We offer the following services:
 
-1. A Swift Package that provides the API mentioned in this documentation.
+1. The swift package that provides the API mentioned in this documentation to use the Segment Anything model.
 2. Consulting services for integrating this package in this app.
-3. Misc. software consulting services.
+3. Other software consulting help.
 
 ## Contact
 

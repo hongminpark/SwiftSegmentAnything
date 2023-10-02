@@ -10,4 +10,4 @@ If you would like to get support in the form of a GitHub issue, submit your issu
 
 ## Contact Information
 
-Please feel free to reach out to `anthonymdito@gmail.com` to get support at any time.
+Please feel free to reach out to `anthony@ditotechnologies.com` to get support at any time.

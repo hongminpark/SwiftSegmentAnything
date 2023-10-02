@@ -10,6 +10,16 @@ The first thing that you need to do is get access to the code. Please reach out 
 
 Add the package to XCode by using the GitHub repository.
 
+### 1. Open the Add Package Dialog
+
+Press `File > Add Package Dependency
+
+This window should show up
+
+@Image(source: "installpage1.png")
+
+### 2. Enter the GitHub package URL in the top right corner. That would be []
+
 ## Via Package.swift
 
 Use the example below to install SwiftSegmentAnything for your package via a `Package.swift`.

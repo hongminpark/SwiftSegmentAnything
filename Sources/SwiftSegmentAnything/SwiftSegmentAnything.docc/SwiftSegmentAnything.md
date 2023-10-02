@@ -10,9 +10,10 @@ A Swift implementation of the [Segment Anything](https://segment-anything.com/) 
 
 ## Demos
 
-- <doc:BoxDemo>: Segment based on a bounding box.
+> tip: We have a demo app in the [App Store](https://apps.apple.com/us/app/segment-anything-clipper/id6468183666)! This is the best way to demo the capabilities of this package on your own content. Download the app in the [App Store](https://apps.apple.com/us/app/segment-anything-clipper/id6468183666)
 
-> tip: We have a demo app in the App Store! This is the best way to demo the capabilities of this package on your own content.
+- <doc:BoxDemo>: Segment based on a bounding box.
+- <doc:PointDemo>: Segmented based on including points.
 
 
 ## Basic API Example
