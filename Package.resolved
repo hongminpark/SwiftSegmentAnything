@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/microsoft/onnxruntime-swift-package-manager",
       "state" : {
-        "branch" : "cdaadfe",
-        "revision" : "cdaadfe0c3497091831c12297a0445e7d081a34e"
+        "branch" : "ce64739",
+        "revision" : "ce64739c6d2f0c362e326b29780a6c035055a431"
       }
     }
   ],

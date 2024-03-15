@@ -18,4 +18,7 @@ public enum SwiftSegmentAnythingError : Error {
     case noInput
     
     case invalidInput(description: String)
+    
+    /// an error thrown when contour requests fail when processing a segment anything mask
+    case contourRequestFailed
 }

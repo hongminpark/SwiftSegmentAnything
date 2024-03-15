@@ -2,7 +2,6 @@ import Foundation
 import CoreImage
 import OnnxRuntimeBindings
 import CoreImage.CIFilterBuiltins
-import UIKit
 
 private func arrayCopiedFromData<T>(_ data: Data) -> [T]? {
   guard data.count % MemoryLayout<T>.stride == 0 else { return nil }
@@ -28,7 +27,7 @@ public actor SwiftSegmentAnythingInference {
         let _ = try await self.proprocessIfNeeded()
     }
     
-    public func getMask(includePoints: [CGPoint] = [], includeBoxes: [CGRect] = [], excludePoints: [CGPoint] = []) async throws -> CIImage {
+    public func getMask(includePoints: [CGPoint] = [], includeBoxes: [CGRect] = [], excludePoints: [CGPoint] = []) async throws -> SwiftSegmentAnythingMask {
         guard !includeBoxes.isEmpty || !includePoints.isEmpty || !excludePoints.isEmpty else {
             throw SwiftSegmentAnythingError.noInput
         }
@@ -91,8 +90,8 @@ public actor SwiftSegmentAnythingInference {
             "orig_im_size": ortOrigImSize,
             "mask_input": ortMask
         ]
-        let outputMasksMutbleData = NSMutableData(length: 1024 * 720 * 4)!
-        let outputMasks = try ORTValue(tensorData: outputMasksMutbleData, elementType: .uInt8, shape: [1, 4, 720, 1024])
+        let outputMasksMutbleData = NSMutableData(length: 1024 * 720 * 4 * 4)! // * 4 for float
+        let outputMasks = try ORTValue(tensorData: outputMasksMutbleData, elementType: .float, shape: [1, 4, 720, 1024])
         try sessionSam.run(withInputs: inputs, outputs: [
             "masks": outputMasks
         ], runOptions: nil)
@@ -150,9 +149,9 @@ public actor SwiftSegmentAnythingInference {
             throw SwiftSegmentAnythingError.internalError(description: "could not resize an image")
         }
         let context = CIContext()
-        guard let cgImage = context.createCGImage(ciImage, from: CGRect(x: 0, y: 0, width: ciImage.extent.width, height: ciImage.extent.height)) else {
-            throw SwiftSegmentAnythingError.internalError(description: "could not create image")
-        }
+//        guard let cgImage = context.createCGImage(ciImage, from: CGRect(x: 0, y: 0, width: ciImage.extent.width, height: ciImage.extent.height)) else {
+//            throw SwiftSegmentAnythingError.internalError(description: "could not create image")
+//        }
         
         var inputTensorValues = [UInt8](repeating: 0, count: inputSize.width * inputSize.height * 3)
 

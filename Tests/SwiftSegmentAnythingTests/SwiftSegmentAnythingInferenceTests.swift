@@ -45,10 +45,31 @@ final class SwiftSegmentAnythingInferenceTests : XCTestCase {
     }
     
     func testGetMaskSanityBox() async throws {
-//        let url = Bundle.module.url(forResource: "demo", withExtension: "jpg")!
-//        let ciImage = CIImage(contentsOf: url)!
-//        let sa = SwiftSegmentAnything.init()
-//        let inference = sa.inference(forCiImage: ciImage)
-//        let outputMask = try await inference.getMask(includePoints: <#T##[CGPoint]#>, excludePoints: <#T##[CGPoint]#>)
+        let url = Bundle.module.url(forResource: "demo", withExtension: "jpg")!
+        let ciImage = CIImage(contentsOf: url)!
+        let sa = SwiftSegmentAnything.init()
+        let inference = sa.inference(forCiImage: ciImage)
+        let outputMask = try await inference.getMask(includePoints: [
+            .init(x: 810, y: 550)
+        ], excludePoints: [
+            .init(x: 10, y: 10)
+        ])
+        XCTAssertGreaterThan(outputMask.extent.width, 0)
+        XCTAssertGreaterThan(outputMask.extent.height, 0)
+    }
+    
+    func testGetBoundingBoxesSanity() async throws {
+        let url = Bundle.module.url(forResource: "demo", withExtension: "jpg")!
+        let ciImage = CIImage(contentsOf: url)!
+        let sa = SwiftSegmentAnything.init()
+        let inference = sa.inference(forCiImage: ciImage)
+        let outputMask = try await inference.getMask(includePoints: [
+            .init(x: 810, y: 550)
+        ], excludePoints: [])
+        let boundingBoxes = try outputMask.boxes()
+        XCTAssertGreaterThan(boundingBoxes.count, 0)
+        for boundingBox in boundingBoxes {
+            XCTAssertLessThan(boundingBox.width, 1)
+        }
     }
 }

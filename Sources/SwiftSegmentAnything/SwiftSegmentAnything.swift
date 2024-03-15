@@ -1,7 +1,11 @@
 import OnnxRuntimeBindings
 import Foundation
 import CoreImage
+#if canImport(UIKit)
 import UIKit
+#else
+import AppKit
+#endif
 
 /// Entrypoint into using the SwiftSegmentAnything package. Will load the models and provide inference capabilities.
 public actor SwiftSegmentAnything {
@@ -27,6 +31,7 @@ public actor SwiftSegmentAnything {
         return inference(forCiImage: ciImage)
     }
     
+    #if canImport(UIKit)
     /// Generates an inference for a UIImage
     nonisolated public func inference(forUiImage: UIImage) throws -> SwiftSegmentAnythingInference {
         guard let ciImage = CIImage.init(image: forUiImage) else {
@@ -34,6 +39,7 @@ public actor SwiftSegmentAnything {
         }
         return inference(forCiImage: ciImage)
     }
+    #endif
     
     /// Generates an inferences for a CIImage
     nonisolated public func inference(forCiImage: CIImage) -> SwiftSegmentAnythingInference {
@@ -100,7 +106,7 @@ public actor SwiftSegmentAnything {
         guard let url else {
             throw SwiftSegmentAnythingError.internalError(description: "Could not pull model from bundle.")
         }
-        let path = if #available(iOS 16.0, *) {
+        let path = if #available(iOS 16.0, macOS 13.0, *) {
             url.path()
         } else {
             url.path

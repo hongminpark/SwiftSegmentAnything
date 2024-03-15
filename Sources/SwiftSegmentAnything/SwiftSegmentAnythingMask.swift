@@ -8,6 +8,7 @@
 import Foundation
 import CoreImage
 import CoreImage.CIFilterBuiltins
+import Vision
 
 /// A simple typealias around CIImage. Providing helper functions for commonly used operations when modifying masks
 public typealias SwiftSegmentAnythingMask = CIImage
@@ -36,5 +37,19 @@ extension SwiftSegmentAnythingMask {
             throw SwiftSegmentAnythingError.internalError(description: "unexpected closing caps image result")
         }
         return result
+    }
+    
+    public func paths() throws -> [CGPath] {
+        let request = VNDetectContoursRequest()
+        let imageRequestHandler = VNImageRequestHandler(ciImage: self)
+        try imageRequestHandler.perform([request])
+        guard let results = request.results else {
+            throw SwiftSegmentAnythingError.contourRequestFailed
+        }
+        return results.flatMap({ $0.topLevelContours }).flatMap({ $0.childContours }).map({ $0.normalizedPath })
+    }
+    
+    public func boxes() throws -> [CGRect] {
+        return try self.paths().map({ $0.boundingBox })
     }
 }

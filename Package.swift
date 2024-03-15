@@ -13,7 +13,7 @@ let package = Package(
             targets: ["SwiftSegmentAnything"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/microsoft/onnxruntime-swift-package-manager", revision: "cdaadfe"),
+        .package(url: "https://github.com/microsoft/onnxruntime-swift-package-manager", revision: "ce64739"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
